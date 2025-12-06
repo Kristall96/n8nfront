@@ -7,8 +7,13 @@ import axios, {
 } from 'axios';
 import { getDeviceInfo } from './deviceInfo';
 
+// Resolve base URL for both environments:
+// - dev:  http://192.168.56.104:4000/api  (from .env.development.local)
+// - prod: /api                            (from .env.production.local)
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api';
+
 const api: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  baseURL: API_BASE_URL,
   withCredentials: true, // send super_admin_refresh cookie
 });
 
